@@ -12,8 +12,8 @@ namespace LoginProject.Infra.Data.Identity
         public SeedUserRoleInitial(RoleManager<IdentityRole> roleManager,
               UserManager<ApplicationUser> userManager)
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
+            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
         public void SeedUsers()

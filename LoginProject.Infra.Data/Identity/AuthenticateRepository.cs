@@ -11,7 +11,7 @@ namespace LoginProject.Infra.Data.Identity
 
         public AuthenticateRepository(SignInManager<ApplicationUser> signInManager)
         {
-            _signInManager = signInManager;
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         }
 
         public async Task Logout()

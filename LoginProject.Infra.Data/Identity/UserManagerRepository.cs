@@ -12,8 +12,8 @@ namespace LoginProject.Infra.Data.Identity
         public UserManagerRepository(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
         public async Task<ApplicationUser?> FindByLoginAsync(string provider, string providerKey)

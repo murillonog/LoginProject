@@ -1,4 +1,4 @@
-﻿namespace LoginProject.WebUI.Extensions
+﻿namespace LoginProject.Application.Extensions
 {
     public static class MapExtensions
     {

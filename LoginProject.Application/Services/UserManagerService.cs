@@ -14,8 +14,8 @@ namespace LoginProject.Application.Services
 
         public UserManagerService(IMapper mapper, IUserManagerRepository userManagerRepository)
         {
-            _mapper = mapper;
-            _userManagerRepository = userManagerRepository;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _userManagerRepository = userManagerRepository ?? throw new ArgumentNullException(nameof(userManagerRepository));
         }
 
         public async Task<IdentityResult> CreateUserAsync(string name, string email, string provider, string providerKey)

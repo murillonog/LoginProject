@@ -15,8 +15,8 @@ namespace LoginProject.Application.Services
 
         public AuthenticateService(IMapper mapper, IAuthenticateRepository authenticateRepository)
         {
-            _mapper = mapper;
-            _authenticateRepository = authenticateRepository;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _authenticateRepository = authenticateRepository ?? throw new ArgumentNullException(nameof(authenticateRepository));
         }
 
         public async Task<SignInResult> Authenticate(string email, string password)

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LoginProject.Application.Dtos.Request;
-using LoginProject.WebUI.Extensions;
+using LoginProject.Application.Extensions;
 using LoginProject.WebUI.ViewModels;
 
 namespace LoginProject.WebUI.Mappings
