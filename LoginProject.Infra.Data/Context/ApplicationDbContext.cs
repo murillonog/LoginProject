@@ -1,4 +1,4 @@
-﻿using LoginProject.Infra.Data.Model;
+﻿using LoginProject.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
