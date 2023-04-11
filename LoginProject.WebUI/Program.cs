@@ -1,15 +1,22 @@
+using LoginProject.Domain.Interfaces;
+using LoginProject.Infra.IoC;
+using LoginProject.WebUI.Mappings;
+using LoginProject.WebUI.Middlewares;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddAuth(builder.Configuration);
+
+builder.Services.AddAutoMapper(typeof(DtoToViewModelMappingProfile));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -17,11 +24,24 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
+SeedUserRoles(app);
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
+
+static void SeedUserRoles(IApplicationBuilder app)
+{
+    using var serviceScope = app.ApplicationServices.CreateScope();
+    var seed = serviceScope.ServiceProvider
+                           .GetService<ISeedUserRoleInitial>();
+    seed?.SeedRoles();
+    seed?.SeedUsers();
+}
