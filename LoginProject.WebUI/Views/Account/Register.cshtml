@@ -1,0 +1,116 @@
+﻿@model LoginProject.WebUI.ViewModels.RegisterViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/fonts/login/icomoon/style.css">
+    <link rel="stylesheet" href="~/css/login/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/login/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/login/style.css">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/images/login/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>Sign Up</h3>
+                                <p class="mb-4">Register your user</p>
+                            </div>
+                            <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal">
+
+                                <div class="form-group first">
+                                    <label for="name">Name</label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group first">
+                                    <label for="phone">Phone</label>
+                                    <input asp-for="Phone" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group first">
+                                    <label for="address">Address</label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-group first">
+                                    <label for="address">Select Gender</label>
+                                    <select asp-for="Gender" class="form-control select-color-gray">
+                                        <option value=""></option>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Others</option>
+                                    </select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                                <div class="form-group first">
+                                    <input asp-for="Birth" class="form-control" type="text"
+                                           onfocus="(this.type='date')" value="" placeholder="Birth" />
+                                    <span asp-validation-for="Birth" class="text-danger"></span>
+                                </div>
+
+                                <hr />
+
+                                <div class="form-group first">
+                                    <label for="username">Email</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group first">
+                                    <label for="password">Password</label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="confirmpassword">Confirm Password</label>
+                                    <input asp-for="ConfirmPassword" class="form-control" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0">
+                                        <span class="caption">Remember me</span>
+                                        <input type="checkbox" checked="checked" />
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                                </div>
+
+                                <input type="submit" value="Register" class="btn btn-block btn-primary">
+
+                                <span class="d-block text-left my-4 text-muted"><a asp-action="Login">Sign In</a> or login with &mdash; </span>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/login/jquery-3.3.1.min.js"></script>
+    <script src="~/js/login/popper.min.js"></script>
+    <script src="~/js/login/bootstrap.min.js"></script>
+    <script src="~/js/login/main.js"></script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

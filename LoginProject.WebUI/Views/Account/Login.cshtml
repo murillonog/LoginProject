@@ -1,0 +1,112 @@
+﻿@model LoginProject.WebUI.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="~/fonts/login/icomoon/style.css">
+    <link rel="stylesheet" href="~/css/login/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/login/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/login/style.css">
+
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/images/login/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>Sign In</h3>
+                                <p class="mb-4">Log In into system</p>
+                            </div>
+                            <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal">
+
+                                <input type="hidden" asp-for="ReturnUrl" />
+
+                                <div class="form-group first">
+                                    <label for="username">Email</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="password">Password</label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0">
+                                        <span class="caption">Remember me</span>
+                                        <input type="checkbox" checked="checked" />
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                                </div>
+
+                                <input type="submit" value="Log In" class="btn btn-block btn-primary">
+
+                                <span class="d-block text-left my-4 text-muted"><a asp-action="Register">Sign Up</a> or login with &mdash; </span>
+                            </form>
+
+                            <div class="social-login">
+                                @{
+                                    var listProviders = Model.Providers?.ToList();
+                                    if (listProviders.Any())
+                                    {
+                                        <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                            <div>
+                                                <p>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            @foreach (var provider in listProviders)
+                                                            {
+                                                                <div class="col col-sm" style="padding:0px !important; margin:0px !important;">
+                                                                    <button type="submit" class="btn btn-primary @provider.Name.ToLower()" name="provider" value="@provider.Name">
+                                                                        <i class="bi bi-@provider.Name.ToLower()"></i>
+                                                                    </button>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                </p>
+                                            </div>
+                                        </form>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/js/login/jquery-3.3.1.min.js"></script>
+    <script src="~/js/login/popper.min.js"></script>
+    <script src="~/js/login/bootstrap.min.js"></script>
+    <script src="~/js/login/main.js"></script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
